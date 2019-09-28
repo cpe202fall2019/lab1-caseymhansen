@@ -35,13 +35,14 @@ def bin_search(target, low, high, int_list):  # must use recursion
          return 0
       else:
          return None
-   if len(int_list[low:high]) > 1:
-      mid = 1 + int(high - 1 / 2)  # Gets the middle index of the list
+   if len(int_list[low:high]) >= 1:
+      # mid = int(high - low / 2)   Gets the middle index of the list
+      mid = (low + high) // 2
       if int_list[mid] == target:  # Checks the middle value of the list
          return mid
          # Checks if middle value in list greater than the target and returns left part of the list
       elif int_list[mid] > target:
-         return bin_search(target, low, mid - 1, int_list)
+         return bin_search(target, low, mid, int_list)
          # Returns right part of the list because the target is greater than the middle value
       else:
          return bin_search(target, mid + 1, high, int_list)
