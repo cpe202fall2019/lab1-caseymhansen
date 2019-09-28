@@ -11,6 +11,11 @@ class TestLab1(unittest.TestCase):
         with self.assertRaises(ValueError):  # used to check for exception
             max_list_iter(nums)
 
+    def test_max_list_iter_empty_list(self):
+        # Checks to make sure max_list_iter returns 'None' when passed an empty list
+        nums = []
+        self.assertEqual(max_list_iter(nums), None)
+
     def test_max_list_iter_beginning_largest(self):
         # Checks if the function returns the largest value if it is the first in the list
         nums = [10, 8, 6, 4, 2]
@@ -42,10 +47,16 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(max_list_iter(nums), 20)
 
     """ Function reverse_rec Tests """
-    def test_reverse_rec(self):
+    def test_reverse_rec_odd_size(self):
         # Checks to make sure this function works on odd and even sized lists
         self.assertEqual(reverse_rec([1, 2, 3]), [3, 2, 1])  # Checks odd number sized list
+
+    def test_reverse_rec_even_size(self):
         self.assertEqual(reverse_rec([1, 2, 3, 4, 5, 6]), [6, 5, 4, 3, 2, 1])  # Checks even number sized list
+
+    def test_reverse_rec_negatives(self):
+        # Checks list with all negative values
+        self.assertEqual(reverse_rec([-5, -4, -3, -2, -1]), [-1, -2, -3, -4, -5])
 
     def test_reverse_rec_single_value(self):
         # Checks the base case when a list with a length of 1 is passed as a parameter
@@ -67,7 +78,7 @@ class TestLab1(unittest.TestCase):
         list_val = [0, 1, 2, 3, 4, 7, 8, 9, 10]
         low = 0
         high = len(list_val)-1
-        self.assertEqual(bin_search(3, low, high, list_val), 3)
+        self.assertEqual(bin_search(2, low, high, list_val), 2)
 
     def test_bin_search_right(self):
         # Checks if the function can find a value in the right part of the array
@@ -78,7 +89,7 @@ class TestLab1(unittest.TestCase):
 
     def test_bin_search_middle(self):
         # Checks if the function can find the value in the middle of the array
-        list_val = [0, 1, 2, 3, 4, 7, 8, 9, 10]
+        list_val = [0, 1, 2, 3, 4, 5, 6, 7, 8]
         low = 0
         high = len(list_val)-1
         self.assertEqual(bin_search(4, low, high, list_val), 4)
@@ -122,6 +133,12 @@ class TestLab1(unittest.TestCase):
         low = 0
         high = len(list_val)
         self.assertEqual(bin_search(1, low, high, list_val), 0)
+
+    def test_bin_search_one_value_no_target(self):
+        list_val = [1]
+        low = 0
+        high = len(list_val)
+        self.assertEqual(bin_search(2, low, high, list_val), None)
 
 
 if __name__ == "__main__":
